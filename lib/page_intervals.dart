@@ -4,7 +4,8 @@ import 'package:codelab_timetracker/page_activities.dart';
 import 'package:codelab_timetracker/tree.dart' as Tree hide getTree;
 // to avoid collision with an Interval class in another library
 import 'package:codelab_timetracker/requests.dart';
-
+import 'package:intl/intl.dart';
+final DateFormat _dateFormatter = DateFormat("yyyy-MM-dd HH:mm:ss");
 
 class PageIntervals extends StatefulWidget {
   final int id;
@@ -68,14 +69,48 @@ class _PageIntervalsState extends State<PageIntervals> {
                 }),
               ],
             ),
-            body: ListView.separated(
-              // it's like ListView.builder() but better because it includes a separator between items
-              padding: const EdgeInsets.all(16.0),
-              itemCount: numChildren,
-              itemBuilder: (BuildContext context, int index) =>
-                  _buildRow(snapshot.data!.root.children[index], index),
-              separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
+            body: Column(
+              children: [
+                if (snapshot.data!.root.name != "root")
+                  Container(
+                    alignment: Alignment.topLeft,
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      snapshot.data!.root.name,
+                      style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                if (snapshot.data!.root.name != "root")
+                  Container(
+                    alignment: Alignment.topLeft,
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      "Initial date: " + (snapshot.data!.root.initialDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                if (snapshot.data!.root.name != "root")
+                  Container(
+                    alignment: Alignment.topLeft,
+                    padding: EdgeInsets.all(10.0),
+                    child: Text(
+                      "Final date: " + (snapshot.data!.root.finalDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                Container(
+                  height: 400,
+                  child: ListView.separated(
+                    // it's like ListView.builder() but better because it includes a separator between items
+                    padding: const EdgeInsets.all(16.0),
+                    itemCount: numChildren,
+                    itemBuilder: (BuildContext context, int index) =>
+                        _buildRow(snapshot.data!.root.children[index], index),
+                    separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(),
+                  ),
+                ),
+              ],
             ),
           );
         } else if (snapshot.hasError) {
