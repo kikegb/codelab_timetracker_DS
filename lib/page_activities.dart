@@ -84,7 +84,7 @@ class _PageActivitiesState extends State<PageActivities> {
             ),
             body: Column(
               children: [
-                if (snapshot.data!.root.name != "root")
+                if (snapshot.data!.root.id != 0)
                   Container(
                     alignment: Alignment.topLeft,
                     padding: EdgeInsets.all(10.0),
@@ -93,7 +93,7 @@ class _PageActivitiesState extends State<PageActivities> {
                       style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
                   ),
-                if (snapshot.data!.root.name != "root")
+                if (snapshot.data!.root.id != 0)
                   Container(
                     alignment: Alignment.topLeft,
                     padding: EdgeInsets.all(10.0),
@@ -110,7 +110,7 @@ class _PageActivitiesState extends State<PageActivities> {
                       ],
                     ),
                   ),
-                if (snapshot.data!.root.name != "root")
+                if (snapshot.data!.root.id != 0)
                   Container(
                     alignment: Alignment.topLeft,
                     padding: EdgeInsets.all(10.0),

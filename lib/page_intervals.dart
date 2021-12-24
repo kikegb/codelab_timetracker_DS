@@ -71,49 +71,46 @@ class _PageIntervalsState extends State<PageIntervals> {
             ),
             body: Column(
               children: [
-                if (snapshot.data!.root.name != "root")
-                  Container(
-                    alignment: Alignment.topLeft,
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      snapshot.data!.root.name,
-                      style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                    ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    snapshot.data!.root.name,
+                    style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
-                if (snapshot.data!.root.name != "root")
-                  Container(
-                    alignment: Alignment.topLeft,
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        const Text(
-                          "Initial date: ",
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          (snapshot.data!.root.initialDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
-                          style: const TextStyle(fontSize: 20),
-                        ),
-                      ],
-                    ),
+                ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      const Text(
+                        "Initial date: ",
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        (snapshot.data!.root.initialDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ],
                   ),
-                if (snapshot.data!.root.name != "root")
-                  Container(
-                    alignment: Alignment.topLeft,
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        const Text(
-                          "Final date: ",
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          (snapshot.data!.root.finalDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
-                          style: const TextStyle(fontSize: 20),
-                        ),
-                      ],
-                    ),
+                ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      const Text(
+                        "Final date: ",
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        (snapshot.data!.root.finalDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ],
                   ),
+                ),
                 Container(
                   height: 400,
                   child: ListView.separated(
