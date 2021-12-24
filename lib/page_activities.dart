@@ -184,7 +184,7 @@ class _PageActivitiesState extends State<PageActivities> {
             start(activity.id);
             _refresh(); // to show immediately that task has stopped
           }
-        }, // TODO start/stop counting the time for tis task
+        },
       );
     } else {
       throw(Exception("Activity that is neither a Task or a Project"));
