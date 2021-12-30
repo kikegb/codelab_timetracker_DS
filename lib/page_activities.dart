@@ -160,31 +160,37 @@ class _PageActivitiesState extends State<PageActivities> {
     String strDuration = Duration(seconds: activity.duration).toString().split('.').first;
     // split by '.' and taking first element of resulting list removes the microseconds part
     if (activity is Project) {
-      return ListTile(
-        leading: const Icon(Icons.weekend_sharp),
-        title: Text('${activity.name}'),
-        trailing: Text('$strDuration'),
-        onTap: () => _navigateDownActivities(activity.id),
+      return Card(
+        elevation: 3,
+        child: ListTile(
+          leading: const Icon(Icons.work_rounded),
+          title: Text('${activity.name}'),
+          trailing: Text('$strDuration'),
+          onTap: () => _navigateDownActivities(activity.id),
+        ),
       );
     } else if (activity is Task) {
       Task task = activity as Task;
       // at the moment is the same, maybe changes in the future
       Widget trailing;
       trailing = Text('$strDuration');
-      return ListTile(
-          leading: const Icon(Icons.assignment_outlined),
-        title: Text('${activity.name}'),
-        trailing: trailing,
-        onTap: () => _navigateDownIntervals(activity.id),
-        onLongPress: () {
-          if ((activity as Task).active) {
-            stop(activity.id);
-            _refresh(); // to show immediately that task has started
-          } else {
-            start(activity.id);
-            _refresh(); // to show immediately that task has stopped
-          }
-        },
+      return Card(
+        elevation: 3,
+        child: ListTile(
+            leading: const Icon(Icons.assignment_rounded),
+          title: Text('${activity.name}'),
+          trailing: trailing,
+          onTap: () => _navigateDownIntervals(activity.id),
+          onLongPress: () {
+            if ((activity as Task).active) {
+              stop(activity.id);
+              _refresh(); // to show immediately that task has started
+            } else {
+              start(activity.id);
+              _refresh(); // to show immediately that task has stopped
+            }
+          },
+        ),
       );
     } else {
       throw(Exception("Activity that is neither a Task or a Project"));

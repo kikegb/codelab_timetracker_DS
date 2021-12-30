@@ -149,7 +149,7 @@ class _PageIntervalsState extends State<PageIntervals> {
     // this removes the microseconds part
     String strFinalDate = interval.finalDate.toString().split('.')[0];
     return ListTile(
-      title: Text('from ${strInitialDate} to ${strFinalDate}'),
+      title: Text('From ${strInitialDate}\nTo ${strFinalDate}'),
       trailing: Text('$strDuration'),
     );
   }
