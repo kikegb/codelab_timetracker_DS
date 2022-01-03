@@ -179,7 +179,30 @@ class _PageActivitiesState extends State<PageActivities> {
         child: ListTile(
             leading: const Icon(Icons.assignment_rounded),
           title: Text('${activity.name}'),
-          trailing: trailing,
+          trailing: Wrap(
+            spacing: 0,
+            children: <Widget>[
+              IconButton(
+                icon: selected
+                    ? Icon(Icons.stop)
+                    : Icon(Icons.play_arrow)
+                ,
+                color: selected
+                    ? Colors.red
+                    : Colors.green,
+                onPressed: () {
+                  if ((activity as Task).active) {
+                    stop(activity.id);
+                    _refresh(); // to show immediately that task has started
+                  } else {
+                    start(activity.id);
+                    _refresh(); // to show immediately that task has stopped
+                  }
+                },
+              ),
+              trailing
+            ],
+          ),
           onTap: () => _navigateDownIntervals(activity.id),
           onLongPress: () {
             if ((activity as Task).active) {
