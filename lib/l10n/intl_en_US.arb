@@ -1,0 +1,10 @@
+{
+  "@@locale": "en_US",
+  "initialDate" : "Initial date: ",
+  "finalDate" : "Final date: ",
+  "from" : "from",
+  "to" : "to",
+  "unknownActivity": "Activity that is neither a Task or a Project",
+  "undefined": "undefined",
+  "dateFormat": "yyyy-MM-dd HH:mm:ss"
+}

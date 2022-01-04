@@ -6,6 +6,8 @@ import 'package:codelab_timetracker/tree.dart' as Tree hide getTree;
 // to avoid collision with an Interval class in another library
 import 'package:codelab_timetracker/requests.dart';
 import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:codelab_timetracker/generated/l10n.dart';
 final DateFormat _dateFormatter = DateFormat("yyyy-MM-dd HH:mm:ss");
 
 class PageIntervals extends StatefulWidget {
@@ -150,15 +152,11 @@ class _PageIntervalsState extends State<PageIntervals> {
                 ),
                 Container(
                   height: 400,
-                  child: ListView.separated(
-                    // it's like ListView.builder() but better because it includes a separator between items
-                    padding: const EdgeInsets.all(16.0),
-                    itemCount: numChildren,
-                    itemBuilder: (BuildContext context, int index) =>
-                        _buildRow(snapshot.data!.root.children[index], index),
-                    separatorBuilder: (BuildContext context, int index) =>
-                    const Divider(),
-                  ),
+                  child: SfCalendar(
+                    view: CalendarView.week,
+                    firstDayOfWeek: 1,
+                    dataSource: MeetingDataSource(_buildIntervals(snapshot.data!.root.children))
+                  )
                 ),
               ],
             ),
@@ -195,5 +193,22 @@ class _PageIntervalsState extends State<PageIntervals> {
       trailing: Text('$strDuration'),
     );
   }
+
+  List<Appointment> _buildIntervals(List<dynamic> children){
+    List<Appointment> intervals = <Appointment>[];
+    for(int i = 0; i < children.length; i++){
+      DateTime init = children[i].initialDate!;
+      DateTime end = children[i].finalDate!;
+      intervals.add(Appointment(startTime: init, endTime: end));
+    }
+    return intervals;
+  }
 }
 
+
+
+class MeetingDataSource extends CalendarDataSource{
+  MeetingDataSource(List<Appointment> source){
+    appointments = source;
+  }
+}

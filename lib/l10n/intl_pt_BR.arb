@@ -1,0 +1,10 @@
+{
+  "@@locale":"pt_BR",
+  "initialDate": "Fecha do inicialisaçao: ",
+  "finalDate": "Fecha do finalisasao",
+  "from" :"dose",
+  "to" : "fins",
+  "unknownActivity" : "No es uma tascao ni um proyecto kkkk",
+  "undefined": "sem definisao",
+  "dateFormat": "dd-MM-yyyy HH:mm:ss"
+}

@@ -29,6 +29,9 @@ environment:
 dependencies:
   http: ^0.13.0
   intl: ^0.17.0
+  syncfusion_flutter_calendar: ^19.4.41
+  flutter_localizations:
+    sdk: flutter
   flutter:
     sdk: flutter
 
@@ -89,3 +92,6 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  main_locale: en_US
+  enabled: true

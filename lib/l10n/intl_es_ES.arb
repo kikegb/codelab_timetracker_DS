@@ -1,0 +1,10 @@
+{
+  "@@locale": "es_ES",
+  "initialDate": "Fecha inicial: ",
+  "finalDate": "Fecha de finalización",
+  "from" : "desde",
+  "to" : "a",
+  "unknownActivity" : "Actividad que no es ni proyecto ni tarea",
+  "undefined": "indefinido",
+  "dateFormat": "dd-MM-yyyy HH:mm:ss"
+}
