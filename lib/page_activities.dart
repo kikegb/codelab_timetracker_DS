@@ -24,6 +24,7 @@ class _PageActivitiesState extends State<PageActivities> {
   late Future<Tree> futureTree;
   bool selected = false;
   bool searching = false;
+  TextEditingController txtController = TextEditingController();
   late Timer _timer;
   static const int periodeRefresh = 6;
 
@@ -76,6 +77,10 @@ class _PageActivitiesState extends State<PageActivities> {
               title: Padding(
                 padding: const EdgeInsets.only(bottom: 10, right: 10),
                 child: TextField(
+                  controller: txtController,
+                  onEditingComplete: () {
+                    searchValues();
+                  },
                   style: new TextStyle(color: Colors.white),
                   cursorColor: Colors.white,
                   autofocus: true,
@@ -258,9 +263,32 @@ class _PageActivitiesState extends State<PageActivities> {
   }
 
 
+  void searchValues(){
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          // Recupera el texto que el usuario ha digitado utilizando nuestro
+          // TextEditingController
+          content: Text(txtController.text),
+        );
+      },
+    );
+    searching=!searching;
+  }
 
-
-
+  void _navigateSearchedActivities(int childId) {
+    _timer.cancel();
+    // we can not do just _refresh() because then the up arrow doesn't appear in the appbar
+    Navigator.of(context)
+        .push(MaterialPageRoute<void>(
+      builder: (context) => PageActivities(childId),
+    )).then((var value) {
+      _activateTimer();
+      _refresh();
+    });
+    //https://stackoverflow.com/questions/49830553/how-to-go-back-and-refresh-the-previous-page-in-flutter?noredirect=1&lq=1
+  }
 
   void _navigateDownActivities(int childId) {
     _timer.cancel();
