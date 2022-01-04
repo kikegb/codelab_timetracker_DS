@@ -6,6 +6,7 @@ import 'package:codelab_timetracker/tree.dart' hide getTree;
 import 'package:codelab_timetracker/requests.dart';
 // has the new getTree() that sends an http request to the server
 import 'dart:async';
+import 'package:codelab_timetracker/generated/l10n.dart';
 import 'package:codelab_timetracker/page_search_result.dart';
 import 'package:intl/intl.dart';
 
@@ -136,8 +137,8 @@ class _PageActivitiesState extends State<PageActivities> {
                     padding: EdgeInsets.all(10.0),
                     child: Row(
                       children: [
-                        const Text(
-                          "Initial date: ",
+                         Text(
+                          S.of(context).initialDate,
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         Text(
@@ -153,8 +154,8 @@ class _PageActivitiesState extends State<PageActivities> {
                     padding: EdgeInsets.all(10.0),
                     child: Row(
                       children: [
-                        const Text(
-                          "Final date: ",
+                         Text(
+                          S.of(context).finalDate,
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         Text(
@@ -257,7 +258,7 @@ class _PageActivitiesState extends State<PageActivities> {
       );
 
     } else {
-      throw(Exception("Activity that is neither a Task or a Project"));
+      throw(Exception(S.of(context).unknownActivity));
       // this solves the problem of return Widget is not nullable because an
       // Exception is also a Widget?
     }

@@ -1,6 +1,8 @@
 import 'package:codelab_timetracker/page_activities.dart';
 import 'package:codelab_timetracker/page_intervals.dart';
 import 'package:flutter/material.dart';
+import 'package:codelab_timetracker/generated/l10n.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(MyApp());
 

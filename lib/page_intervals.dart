@@ -121,8 +121,8 @@ class _PageIntervalsState extends State<PageIntervals> {
                   padding: EdgeInsets.all(10.0),
                   child: Row(
                     children: [
-                      const Text(
-                        "Initial date: ",
+                      Text(
+                        S.of(context).initialDate,
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -137,8 +137,8 @@ class _PageIntervalsState extends State<PageIntervals> {
                   padding: EdgeInsets.all(10.0),
                   child: Row(
                     children: [
-                      const Text(
-                        "Final date: ",
+                       Text(
+                        S.of(context).finalDate,
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -191,7 +191,7 @@ class _PageIntervalsState extends State<PageIntervals> {
     // this removes the microseconds part
     String strFinalDate = interval.finalDate.toString().split('.')[0];
     return ListTile(
-      title: Text('From ${strInitialDate}\nTo ${strFinalDate}'),
+      title: Text(S.of(context).from+ '${strInitialDate}\n'+S.of(context).to+' ${strFinalDate}'),
       trailing: Text('$strDuration'),
     );
   }
