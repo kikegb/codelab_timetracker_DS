@@ -50,70 +50,70 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Initial date: `
+  /// `Fecha inicial: `
   String get initialDate {
     return Intl.message(
-      'Initial date: ',
+      'Fecha inicial: ',
       name: 'initialDate',
       desc: '',
       args: [],
     );
   }
 
-  /// `Final date: `
+  /// `Fecha de finalización`
   String get finalDate {
     return Intl.message(
-      'Final date: ',
+      'Fecha de finalización',
       name: 'finalDate',
       desc: '',
       args: [],
     );
   }
 
-  /// `from`
+  /// `desde`
   String get from {
     return Intl.message(
-      'from',
+      'desde',
       name: 'from',
       desc: '',
       args: [],
     );
   }
 
-  /// `to`
+  /// `a`
   String get to {
     return Intl.message(
-      'to',
+      'a',
       name: 'to',
       desc: '',
       args: [],
     );
   }
 
-  /// `Activity that is neither a Task or a Project`
+  /// `Actividad que no es ni proyecto ni tarea`
   String get unknownActivity {
     return Intl.message(
-      'Activity that is neither a Task or a Project',
+      'Actividad que no es ni proyecto ni tarea',
       name: 'unknownActivity',
       desc: '',
       args: [],
     );
   }
 
-  /// `undefined`
+  /// `indefinido`
   String get undefined {
     return Intl.message(
-      'undefined',
+      'indefinido',
       name: 'undefined',
       desc: '',
       args: [],
     );
   }
 
-  /// `yyyy-MM-dd HH:mm:ss`
+  /// `dd-MM-yyyy HH:mm:ss`
   String get dateFormat {
     return Intl.message(
-      'yyyy-MM-dd HH:mm:ss',
+      'dd-MM-yyyy HH:mm:ss',
       name: 'dateFormat',
       desc: '',
       args: [],
@@ -126,8 +126,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale.fromSubtags(languageCode: 'en', countryCode: 'US'),
       Locale.fromSubtags(languageCode: 'es', countryCode: 'ES'),
+      Locale.fromSubtags(languageCode: 'en', countryCode: 'US'),
       Locale.fromSubtags(languageCode: 'pt', countryCode: 'BR'),
     ];
   }
