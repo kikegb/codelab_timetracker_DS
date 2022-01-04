@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:codelab_timetracker/page_activities.dart';
+import 'package:codelab_timetracker/page_search_result.dart';
 import 'package:codelab_timetracker/tree.dart' as Tree hide getTree;
 // to avoid collision with an Interval class in another library
 import 'package:codelab_timetracker/requests.dart';
@@ -18,6 +19,8 @@ class _PageIntervalsState extends State<PageIntervals> {
   late int id;
   late Future<Tree.Tree> futureTree;
   late Timer _timer;
+  bool searching = false;
+  TextEditingController txtController = TextEditingController();
   static const int periodeRefresh = 6;
 
   @override
@@ -53,8 +56,35 @@ class _PageIntervalsState extends State<PageIntervals> {
         if (snapshot.hasData) {
           int numChildren = snapshot.data!.root.children.length;
           return Scaffold(
-            appBar: AppBar(
-              title: Text(snapshot.data!.root.name),
+            appBar: searching ? AppBar(
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () {
+                    searching=!searching;
+                  }),
+              title: Padding(
+                padding: const EdgeInsets.only(bottom: 10, right: 10),
+                child: TextField(
+                  controller: txtController,
+                  onEditingComplete: () {
+                    searchValues();
+                  },
+                  style: new TextStyle(color: Colors.white),
+                  cursorColor: Colors.white,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    focusColor: Colors.white,
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
+                  ),
+                ),
+              ),
+            )
+                :AppBar(
+              title: const Text('TimeTracker'),
               actions: <Widget>[
                 IconButton(icon: Icon(Icons.home),
                     onPressed: () {
@@ -66,7 +96,14 @@ class _PageIntervalsState extends State<PageIntervals> {
                       Navigator.popUntil(context, ModalRoute.withName('/'));
                       */
                       PageActivities(0);
-                }),
+                    }),
+                IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      searching = !searching;
+                    }),
+                //TODO other actions
+
               ],
             ),
             body: Column(
@@ -139,7 +176,12 @@ class _PageIntervalsState extends State<PageIntervals> {
       },
     );
   }
-
+  void searchValues(){
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) =>  SecondRoute(txtController.text)),
+    );
+    searching=!searching;
+  }
   Widget _buildRow(Tree.Interval interval, int index) {
     String strDuration = Duration(seconds: interval.duration)
         .toString()
