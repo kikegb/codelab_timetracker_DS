@@ -22,7 +22,8 @@ class PageActivities extends StatefulWidget {
 class _PageActivitiesState extends State<PageActivities> {
   late int id;
   late Future<Tree> futureTree;
-
+  bool selected = false;
+  bool searching = false;
   late Timer _timer;
   static const int periodeRefresh = 6;
 
@@ -65,7 +66,30 @@ class _PageActivitiesState extends State<PageActivities> {
         // anonymous function
         if (snapshot.hasData) {
           return Scaffold(
-            appBar: AppBar(
+            appBar: searching ? AppBar(
+              automaticallyImplyLeading: false,
+              leading: IconButton(
+                  icon: Icon(Icons.clear),
+                  onPressed: () {
+                    searching=!searching;
+                  }),
+              title: Padding(
+                padding: const EdgeInsets.only(bottom: 10, right: 10),
+                child: TextField(
+                  style: new TextStyle(color: Colors.white),
+                  cursorColor: Colors.white,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    focusColor: Colors.white,
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
+                  ),
+                ),
+              ),
+            )
+            :AppBar(
               title: const Text('TimeTracker'),
               actions: <Widget>[
                 IconButton(icon: Icon(Icons.home),
@@ -79,9 +103,16 @@ class _PageActivitiesState extends State<PageActivities> {
                       */
                       PageActivities(0);
                     }),
+                IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      searching = !searching;
+                    }),
                 //TODO other actions
+
               ],
-            ),
+            )
+            ,
             body: Column(
               children: [
                 if (snapshot.data!.root.id != 0)
@@ -130,14 +161,14 @@ class _PageActivitiesState extends State<PageActivities> {
                 Container(
                   height: 400,
                   child: ListView.separated(
-                        // it's like ListView.builder() but better because it includes a separator between items
-                        padding: const EdgeInsets.all(16.0),
-                        itemCount: snapshot.data!.root.children.length,
-                        itemBuilder: (BuildContext context, int index) =>
-                            _buildRow(snapshot.data!.root.children[index], index),
-                        separatorBuilder: (BuildContext context, int index) =>
-                        const Divider(),
-                      ),
+                    // it's like ListView.builder() but better because it includes a separator between items
+                    padding: const EdgeInsets.all(16.0),
+                    itemCount: snapshot.data!.root.children.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        _buildRow(snapshot.data!.root.children[index], index),
+                    separatorBuilder: (BuildContext context, int index) =>
+                    const Divider(),
+                  ),
                 ),
               ],
             ),
@@ -173,11 +204,12 @@ class _PageActivitiesState extends State<PageActivities> {
       Task task = activity as Task;
       // at the moment is the same, maybe changes in the future
       Widget trailing;
+      selected =activity.active;
       trailing = Text('$strDuration');
       return Card(
         elevation: 3,
         child: ListTile(
-            leading: const Icon(Icons.assignment_rounded),
+          leading: const Icon(Icons.assignment_rounded),
           title: Text('${activity.name}'),
           trailing: Wrap(
             spacing: 0,
@@ -214,13 +246,21 @@ class _PageActivitiesState extends State<PageActivities> {
             }
           },
         ),
+
+
       );
+
     } else {
       throw(Exception("Activity that is neither a Task or a Project"));
       // this solves the problem of return Widget is not nullable because an
       // Exception is also a Widget?
     }
   }
+
+
+
+
+
 
   void _navigateDownActivities(int childId) {
     _timer.cancel();
