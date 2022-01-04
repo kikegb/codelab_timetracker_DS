@@ -1,34 +1,27 @@
-import 'package:codelab_timetracker/page_intervals.dart';
-import 'package:codelab_timetracker/page_report.dart';
-import 'package:flutter/material.dart';
-import 'package:codelab_timetracker/tree.dart' hide getTree;
-// the old getTree()
-import 'package:codelab_timetracker/requests.dart';
-// has the new getTree() that sends an http request to the server
 import 'dart:async';
-
+import 'package:flutter/material.dart';
+import 'package:codelab_timetracker/page_activities.dart';
+import 'package:codelab_timetracker/page_search_result.dart';
+import 'package:codelab_timetracker/tree.dart' as Tree hide getTree;
+// to avoid collision with an Interval class in another library
+import 'package:codelab_timetracker/requests.dart';
 import 'package:intl/intl.dart';
 final DateFormat _dateFormatter = DateFormat("yyyy-MM-dd HH:mm:ss");
 
-class PageActivities extends StatefulWidget {
-  @override
-  _PageActivitiesState createState() => _PageActivitiesState();
+class PageIntervals extends StatefulWidget {
   final int id;
-  PageActivities(this.id);
-
+  PageIntervals(this.id);
+  @override
+  _PageIntervalsState createState() => _PageIntervalsState();
 }
 
-
-class _PageActivitiesState extends State<PageActivities> {
+class _PageIntervalsState extends State<PageIntervals> {
   late int id;
-  late Future<Tree> futureTree;
-  bool selected = false;
+  late Future<Tree.Tree> futureTree;
+  late Timer _timer;
   bool searching = false;
   TextEditingController txtController = TextEditingController();
-  late Timer _timer;
   static const int periodeRefresh = 6;
-
-  // better a multiple of periode in TimeTracker, 2 seconds
 
   @override
   void initState() {
@@ -36,11 +29,6 @@ class _PageActivitiesState extends State<PageActivities> {
     id = widget.id;
     futureTree = getTree(id);
     _activateTimer();
-  }
-
-  void _refresh() async {
-    futureTree = getTree(id); // to be used in build()
-    setState(() {});
   }
 
   void _activateTimer() {
@@ -60,12 +48,13 @@ class _PageActivitiesState extends State<PageActivities> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Tree>(
+    return FutureBuilder<Tree.Tree>(
       future: futureTree,
       // this makes the tree of children, when available, go into snapshot.data
       builder: (context, snapshot) {
         // anonymous function
         if (snapshot.hasData) {
+          int numChildren = snapshot.data!.root.children.length;
           return Scaffold(
             appBar: searching ? AppBar(
               automaticallyImplyLeading: false,
@@ -94,7 +83,7 @@ class _PageActivitiesState extends State<PageActivities> {
                 ),
               ),
             )
-            :AppBar(
+                :AppBar(
               title: const Text('TimeTracker'),
               actions: <Widget>[
                 IconButton(icon: Icon(Icons.home),
@@ -116,59 +105,55 @@ class _PageActivitiesState extends State<PageActivities> {
                 //TODO other actions
 
               ],
-            )
-            ,
+            ),
             body: Column(
               children: [
-                if (snapshot.data!.root.id != 0)
-                  Container(
-                    alignment: Alignment.topLeft,
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      snapshot.data!.root.name,
-                      style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                    ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
+                    snapshot.data!.root.name,
+                    style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
-                if (snapshot.data!.root.id != 0)
-                  Container(
-                    alignment: Alignment.topLeft,
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        const Text(
-                          "Initial date: ",
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          (snapshot.data!.root.initialDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
-                          style: const TextStyle(fontSize: 20),
-                        ),
-                      ],
-                    ),
+                ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      const Text(
+                        "Initial date: ",
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        (snapshot.data!.root.initialDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ],
                   ),
-                if (snapshot.data!.root.id != 0)
-                  Container(
-                    alignment: Alignment.topLeft,
-                    padding: EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        const Text(
-                          "Final date: ",
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          (snapshot.data!.root.finalDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
-                          style: const TextStyle(fontSize: 20),
-                        ),
-                      ],
-                    ),
+                ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  padding: EdgeInsets.all(10.0),
+                  child: Row(
+                    children: [
+                      const Text(
+                        "Final date: ",
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        (snapshot.data!.root.finalDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ],
                   ),
+                ),
                 Container(
                   height: 400,
                   child: ListView.separated(
                     // it's like ListView.builder() but better because it includes a separator between items
                     padding: const EdgeInsets.all(16.0),
-                    itemCount: snapshot.data!.root.children.length,
+                    itemCount: numChildren,
                     itemBuilder: (BuildContext context, int index) =>
                         _buildRow(snapshot.data!.root.children[index], index),
                     separatorBuilder: (BuildContext context, int index) =>
@@ -191,126 +176,24 @@ class _PageActivitiesState extends State<PageActivities> {
       },
     );
   }
-
-  Widget _buildRow(Activity activity, int index) {
-    String strDuration = Duration(seconds: activity.duration).toString().split('.').first;
-    // split by '.' and taking first element of resulting list removes the microseconds part
-    if (activity is Project) {
-      return Card(
-        elevation: 3,
-        child: ListTile(
-          leading: const Icon(Icons.work_rounded),
-          title: Text('${activity.name}'),
-          trailing: Text('$strDuration'),
-          onTap: () => _navigateDownActivities(activity.id),
-        ),
-      );
-    } else if (activity is Task) {
-      Task task = activity as Task;
-      // at the moment is the same, maybe changes in the future
-      Widget trailing;
-      selected =activity.active;
-      trailing = Text('$strDuration');
-      return Card(
-        elevation: 3,
-        child: ListTile(
-          leading: const Icon(Icons.assignment_rounded),
-          title: Text('${activity.name}'),
-          trailing: Wrap(
-            spacing: 0,
-            children: <Widget>[
-              IconButton(
-                icon: selected
-                    ? Icon(Icons.stop)
-                    : Icon(Icons.play_arrow)
-                ,
-                color: selected
-                    ? Colors.red
-                    : Colors.green,
-                onPressed: () {
-                  if ((activity as Task).active) {
-                    stop(activity.id);
-                    _refresh(); // to show immediately that task has started
-                  } else {
-                    start(activity.id);
-                    _refresh(); // to show immediately that task has stopped
-                  }
-                },
-              ),
-              trailing
-            ],
-          ),
-          onTap: () => _navigateDownIntervals(activity.id),
-          onLongPress: () {
-            if ((activity as Task).active) {
-              stop(activity.id);
-              _refresh(); // to show immediately that task has started
-            } else {
-              start(activity.id);
-              _refresh(); // to show immediately that task has stopped
-            }
-          },
-        ),
-
-
-      );
-
-    } else {
-      throw(Exception("Activity that is neither a Task or a Project"));
-      // this solves the problem of return Widget is not nullable because an
-      // Exception is also a Widget?
-    }
-  }
-
-
   void searchValues(){
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          // Recupera el texto que el usuario ha digitado utilizando nuestro
-          // TextEditingController
-          content: Text(txtController.text),
-        );
-      },
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) =>  SecondRoute(txtController.text)),
     );
     searching=!searching;
   }
-
-  void _navigateSearchedActivities(int childId) {
-    _timer.cancel();
-    // we can not do just _refresh() because then the up arrow doesn't appear in the appbar
-    Navigator.of(context)
-        .push(MaterialPageRoute<void>(
-      builder: (context) => PageActivities(childId),
-    )).then((var value) {
-      _activateTimer();
-      _refresh();
-    });
-    //https://stackoverflow.com/questions/49830553/how-to-go-back-and-refresh-the-previous-page-in-flutter?noredirect=1&lq=1
-  }
-
-  void _navigateDownActivities(int childId) {
-    _timer.cancel();
-    // we can not do just _refresh() because then the up arrow doesn't appear in the appbar
-    Navigator.of(context)
-        .push(MaterialPageRoute<void>(
-      builder: (context) => PageActivities(childId),
-    )).then((var value) {
-      _activateTimer();
-      _refresh();
-    });
-    //https://stackoverflow.com/questions/49830553/how-to-go-back-and-refresh-the-previous-page-in-flutter?noredirect=1&lq=1
-  }
-
-  void _navigateDownIntervals(int childId) {
-    _timer.cancel();
-    Navigator.of(context)
-        .push(MaterialPageRoute<void>(
-      builder: (context) => PageIntervals(childId),
-    )).then((var value) {
-      _activateTimer();
-      _refresh();
-    });
+  Widget _buildRow(Tree.Interval interval, int index) {
+    String strDuration = Duration(seconds: interval.duration)
+        .toString()
+        .split('.')
+        .first;
+    String strInitialDate = interval.initialDate.toString().split('.')[0];
+    // this removes the microseconds part
+    String strFinalDate = interval.finalDate.toString().split('.')[0];
+    return ListTile(
+      title: Text('From ${strInitialDate}\nTo ${strFinalDate}'),
+      trailing: Text('$strDuration'),
+    );
   }
 }
+
