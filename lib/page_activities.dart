@@ -10,7 +10,7 @@ import 'package:codelab_timetracker/generated/l10n.dart';
 import 'package:codelab_timetracker/page_search_result.dart';
 import 'package:intl/intl.dart';
 
-final DateFormat _dateFormatter = DateFormat("yyyy-MM-dd HH:mm:ss");
+
 
 class PageActivities extends StatefulWidget {
   @override
@@ -62,6 +62,7 @@ class _PageActivitiesState extends State<PageActivities> {
 
   @override
   Widget build(BuildContext context) {
+    DateFormat _dateFormatter = DateFormat(S.of(context).dateFormat);
     return FutureBuilder<Tree>(
       future: futureTree,
       // this makes the tree of children, when available, go into snapshot.data
@@ -96,7 +97,7 @@ class _PageActivitiesState extends State<PageActivities> {
                 ),
               ),
             )
-            :AppBar(
+                :AppBar(
               title: const Text('TimeTracker'),
               actions: <Widget>[
                 IconButton(icon: Icon(Icons.home),
@@ -137,12 +138,12 @@ class _PageActivitiesState extends State<PageActivities> {
                     padding: EdgeInsets.all(10.0),
                     child: Row(
                       children: [
-                         Text(
+                        Text(
                           S.of(context).initialDate,
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          (snapshot.data!.root.initialDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
+                          (snapshot.data!.root.initialDate == null? S.of(context).undefined : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
                           style: const TextStyle(fontSize: 20),
                         ),
                       ],
@@ -154,12 +155,12 @@ class _PageActivitiesState extends State<PageActivities> {
                     padding: EdgeInsets.all(10.0),
                     child: Row(
                       children: [
-                         Text(
+                        Text(
                           S.of(context).finalDate,
                           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          (snapshot.data!.root.finalDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
+                          (snapshot.data!.root.finalDate == null? S.of(context).undefined : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
                           style: const TextStyle(fontSize: 20),
                         ),
                       ],
