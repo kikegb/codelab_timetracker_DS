@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:codelab_timetracker/generated/l10n.dart';
 
 
 class SecondRoute extends StatelessWidget {
@@ -9,7 +9,7 @@ class SecondRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String resultsString = 'Results for: ' + this.searchedString;
+    String resultsString = S.of(context).resultsFor + this.searchedString;
     return Scaffold(
       appBar: AppBar(
         title: Text(searchedString),
