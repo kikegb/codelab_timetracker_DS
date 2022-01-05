@@ -4,7 +4,8 @@
   "finalDate": "Fecha do finalisasao",
   "from" :"dose",
   "to" : "fins",
-  "unknownActivity" : "No es uma tascao ni um proyecto kkkk",
+  "unknownActivity" : "No es uma tasca ni um proyecto kkkk",
   "undefined": "sem definisao",
-  "dateFormat": "dd-MM-yyyy HH:mm:ss"
+  "dateFormat": "dd-MM-yyyy HH:mm:ss",
+  "resultsFor": "Resultadinho per: "
 }
