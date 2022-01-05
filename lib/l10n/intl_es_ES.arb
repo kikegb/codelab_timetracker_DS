@@ -6,5 +6,6 @@
   "to" : "a",
   "unknownActivity" : "Actividad que no es ni proyecto ni tarea",
   "undefined": "indefinido",
-  "dateFormat": "dd-MM-yyyy HH:mm:ss"
+  "dateFormat": "dd-MM-yyyy HH:mm:ss",
+  "resultsFor": "Resultados para: "
 }
