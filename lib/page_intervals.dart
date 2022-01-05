@@ -128,7 +128,7 @@ class _PageIntervalsState extends State<PageIntervals> {
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        (snapshot.data!.root.initialDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
+                        (snapshot.data!.root.initialDate == null? S.of(context).undefined  : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
                         style: const TextStyle(fontSize: 20),
                       ),
                     ],
@@ -139,24 +139,24 @@ class _PageIntervalsState extends State<PageIntervals> {
                   padding: EdgeInsets.all(10.0),
                   child: Row(
                     children: [
-                       Text(
+                      Text(
                         S.of(context).finalDate,
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        (snapshot.data!.root.finalDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
+                        (snapshot.data!.root.finalDate == null? S.of(context).undefined : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
                         style: const TextStyle(fontSize: 20),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  height: 400,
-                  child: SfCalendar(
-                    view: CalendarView.week,
-                    firstDayOfWeek: 1,
-                    dataSource: MeetingDataSource(_buildIntervals(snapshot.data!.root.children))
-                  )
+                    height: 400,
+                    child: SfCalendar(
+                        view: CalendarView.week,
+                        firstDayOfWeek: 1,
+                        dataSource: MeetingDataSource(_buildIntervals(snapshot.data!.root.children))
+                    )
                 ),
               ],
             ),
