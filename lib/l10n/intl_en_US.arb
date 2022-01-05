@@ -6,5 +6,6 @@
   "to" : "to",
   "unknownActivity": "Activity that is neither a Task or a Project",
   "undefined": "undefined",
-  "dateFormat": "yyyy-MM-dd HH:mm:ss"
+  "dateFormat": "yyyy-MM-dd HH:mm:ss",
+  "resultsFor": "Results for: "
 }
