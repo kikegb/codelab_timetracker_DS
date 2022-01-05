@@ -1,11 +1,32 @@
 {
   "@@locale": "es_ES",
   "initialDate": "Fecha inicial: ",
-  "finalDate": "Fecha de finalización",
+  "finalDate": "Fecha de finalización: ",
   "from" : "desde",
   "to" : "a",
   "unknownActivity" : "Actividad que no es ni proyecto ni tarea",
   "undefined": "indefinido",
   "dateFormat": "dd-MM-yyyy HH:mm:ss",
-  "resultsFor": "Resultados para: "
+  "resultsFor": "Resultados para: ",
+  "intervalDate": "desde {date} {hour} \n a {finalDate} {finalhour}",
+  "@intervalDate": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "dMy"
+      },
+      "hour": {
+        "type": "DateTime",
+        "format": "Hms"
+      },
+      "finalDate": {
+        "type": "DateTime",
+        "format": "dMy"
+      },
+      "finalhour": {
+        "type": "DateTime",
+        "format": "Hms"
+      }
+    }
+  }
 }
