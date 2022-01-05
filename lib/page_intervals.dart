@@ -8,7 +8,7 @@ import 'package:codelab_timetracker/requests.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:codelab_timetracker/generated/l10n.dart';
-final DateFormat _dateFormatter = DateFormat("yyyy-MM-dd HH:mm:ss");
+
 
 class PageIntervals extends StatefulWidget {
   final int id;
@@ -50,6 +50,7 @@ class _PageIntervalsState extends State<PageIntervals> {
 
   @override
   Widget build(BuildContext context) {
+    DateFormat _dateFormatter = DateFormat(S.of(context).dateFormat);
     return FutureBuilder<Tree.Tree>(
       future: futureTree,
       // this makes the tree of children, when available, go into snapshot.data
@@ -188,8 +189,11 @@ class _PageIntervalsState extends State<PageIntervals> {
     String strInitialDate = interval.initialDate.toString().split('.')[0];
     // this removes the microseconds part
     String strFinalDate = interval.finalDate.toString().split('.')[0];
+    DateTime strFinalDateTime = DateTime.parse(strFinalDate);
+    DateTime strInitialDateTime = DateTime.parse(strInitialDate);
+
     return ListTile(
-      title: Text(S.of(context).from+ '${strInitialDate}\n'+S.of(context).to+' ${strFinalDate}'),
+      title: Text(S.of(context).intervalDate(strInitialDateTime, strInitialDateTime,strFinalDateTime,strFinalDateTime)),
       trailing: Text('$strDuration'),
     );
   }
