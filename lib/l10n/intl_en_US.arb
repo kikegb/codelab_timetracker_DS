@@ -7,5 +7,26 @@
   "unknownActivity": "Activity that is neither a Task or a Project",
   "undefined": "undefined",
   "dateFormat": "yyyy-MM-dd HH:mm:ss",
-  "resultsFor": "Results for: "
+  "resultsFor": "Results for: ",
+  "intervalDate": "desde {date} {hour} \n a {finalDate} {finalhour}",
+  "@intervalDate": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMd"
+      },
+      "hour": {
+        "type": "DateTime",
+        "format": "Hms"
+      },
+      "finalDate": {
+        "type": "DateTime",
+        "format": "yMd"
+      },
+      "finalhour": {
+        "type": "DateTime",
+        "format": "Hms"
+      }
+    }
+  }
 }
