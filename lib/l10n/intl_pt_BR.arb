@@ -7,5 +7,26 @@
   "unknownActivity" : "No es uma tasca ni um proyecto kkkk",
   "undefined": "sem definisao",
   "dateFormat": "dd-MM-yyyy HH:mm:ss",
-  "resultsFor": "Resultadinho per: "
+  "resultsFor": "Resultadinho per: ",
+  "intervalDate": "desde {date} {hour} \n a {finalDate} {finalhour}",
+  "@intervalDate": {
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "dMy"
+      },
+      "hour": {
+        "type": "DateTime",
+        "format": "Hms"
+      },
+      "finalDate": {
+        "type": "DateTime",
+        "format": "dMy"
+      },
+      "finalhour": {
+        "type": "DateTime",
+        "format": "Hms"
+      }
+    }
+  }
 }
