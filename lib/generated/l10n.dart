@@ -60,10 +60,10 @@ class S {
     );
   }
 
-  /// `Fecha de finalización`
+  /// `Fecha de finalización: `
   String get finalDate {
     return Intl.message(
-      'Fecha de finalización',
+      'Fecha de finalización: ',
       name: 'finalDate',
       desc: '',
       args: [],
@@ -115,6 +115,48 @@ class S {
     return Intl.message(
       'dd-MM-yyyy HH:mm:ss',
       name: 'dateFormat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resultados para: `
+  String get resultsFor {
+    return Intl.message(
+      'Resultados para: ',
+      name: 'resultsFor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'intervalDate' key
+
+  /// `Tipo de vista: `
+  String get selectViewTitle {
+    return Intl.message(
+      'Tipo de vista: ',
+      name: 'selectViewTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lista`
+  String get listView {
+    return Intl.message(
+      'Lista',
+      name: 'listView',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Calendario`
+  String get calendarView {
+    return Intl.message(
+      'Calendario',
+      name: 'calendarView',
       desc: '',
       args: [],
     );

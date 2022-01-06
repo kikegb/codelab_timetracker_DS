@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:codelab_timetracker/page_activities.dart';
 import 'package:codelab_timetracker/page_search_result.dart';
@@ -104,7 +105,6 @@ class _PageIntervalsState extends State<PageIntervals> {
                     onPressed: () {
                       searching = !searching;
                     }),
-                //TODO other actions
 
               ],
             ),
@@ -146,6 +146,24 @@ class _PageIntervalsState extends State<PageIntervals> {
                       Text(
                         (snapshot.data!.root.finalDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
                         style: const TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  child: Row(
+                    children: [
+                      Text(
+                        S.of(context).selectViewTitle,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        S.of(context).listView,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        S.of(context).calendarView,
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),

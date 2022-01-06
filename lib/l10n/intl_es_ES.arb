@@ -9,6 +9,9 @@
   "dateFormat": "dd-MM-yyyy HH:mm:ss",
   "resultsFor": "Resultados para: ",
   "intervalDate": "desde {date} {hour} \n a {finalDate} {finalhour}",
+  "selectViewTitle": "Tipo de vista: ",
+  "listView": "Lista",
+  "calendarView": "Calendario",
   "@intervalDate": {
     "placeholders": {
       "date": {
