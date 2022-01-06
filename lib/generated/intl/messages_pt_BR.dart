@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "calendarView": MessageLookupByLibrary.simpleMessage("Calendário"),
         "dateFormat":
             MessageLookupByLibrary.simpleMessage("dd-MM-yyyy HH:mm:ss"),
         "finalDate":
@@ -29,9 +30,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "from": MessageLookupByLibrary.simpleMessage("dose"),
         "initialDate":
             MessageLookupByLibrary.simpleMessage("Fecha do inicialisaçao: "),
+        "listView": MessageLookupByLibrary.simpleMessage("Lista"),
+        "resultsFor":
+            MessageLookupByLibrary.simpleMessage("Resultadinho per: "),
+        "selectViewTitle":
+            MessageLookupByLibrary.simpleMessage("Tipo de visualização: "),
         "to": MessageLookupByLibrary.simpleMessage("fins"),
         "undefined": MessageLookupByLibrary.simpleMessage("sem definisao"),
         "unknownActivity": MessageLookupByLibrary.simpleMessage(
-            "No es uma tascao ni um proyecto kkkk")
+            "No es uma tasca ni um proyecto kkkk")
       };
 }
