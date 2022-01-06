@@ -12,6 +12,12 @@
   "selectViewTitle": "Tipo de visualização: ",
   "listView": "Lista",
   "calendarView": "Calendário",
+  "create_project": "Criar Projeto",
+  "create": "Criar",
+  "Iproject": "Insira o nome do projeto",
+  "Name": "Nome",
+  "Itask": "Insira o nome da tarefa",
+  "create_task": "Crie a Tarefa",
   "@intervalDate": {
     "placeholders": {
       "date": {

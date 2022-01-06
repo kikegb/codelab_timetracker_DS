@@ -12,6 +12,12 @@
   "selectViewTitle": "View type: ",
   "listView": "List",
   "calendarView": "Calendar",
+  "create_project": "Create Project",
+  "create": "Create",
+  "Iproject": "Enter project name",
+  "Name": "Name",
+  "Itask": "Enter task name",
+  "create_task": "Create Task",
   "@intervalDate": {
     "placeholders": {
       "date": {

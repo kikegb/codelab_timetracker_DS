@@ -37,8 +37,14 @@ class MenuItems {
     itemProject,
     itemTask,
   ];
-  static const itemProject = MenuItem(text: 'Crear Proyecto', icon: Icons.weekend_sharp);
-  static const itemTask = MenuItem(text: 'Crear Tarea', icon: Icons.assignment_outlined);
+  static const itemProject = MenuItem(
+      text: 'Crear Proyecto',
+      icon: Icons.weekend_sharp,
+  );
+  static const itemTask = MenuItem(
+      text: 'Crear Tarea',
+      icon: Icons.assignment_outlined,
+  );
 }
 
 class _PageActivitiesState extends State<PageActivities> {

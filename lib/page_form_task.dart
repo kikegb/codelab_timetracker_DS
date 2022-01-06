@@ -29,7 +29,7 @@ class _FormPageTaskState extends State<FormPageTask> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Crear Tarea'),
+        title: Text(S.of(context).create_task),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.home),
               onPressed: () {
@@ -64,7 +64,7 @@ class _FormPageTaskState extends State<FormPageTask> {
                   }
                 },
                 color: Colors.blue,
-                child: Text('Crear', style:TextStyle(color: Colors.white)),
+                child: Text((S.of(context).create), style:TextStyle(color: Colors.white)),
               ),
             ],
           ),
@@ -79,8 +79,8 @@ class _FormPageTaskState extends State<FormPageTask> {
         controller: name,
         validator: (value) => value!.isEmpty ? "campo requerido" : null,
         decoration: InputDecoration(
-          labelText: 'Introducir nombre de la Tarea',
-          hintText: 'Nombre',
+          labelText: (S.of(context).Itask),
+          hintText: (S.of(context).Name),
         ),
       ),
     );
