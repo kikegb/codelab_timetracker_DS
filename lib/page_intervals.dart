@@ -8,7 +8,7 @@ import 'package:codelab_timetracker/requests.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:codelab_timetracker/generated/l10n.dart';
-
+final DateFormat _dateFormatter = DateFormat("yyyy-MM-dd HH:mm:ss");
 
 class PageIntervals extends StatefulWidget {
   final int id;
@@ -50,7 +50,6 @@ class _PageIntervalsState extends State<PageIntervals> {
 
   @override
   Widget build(BuildContext context) {
-    DateFormat _dateFormatter = DateFormat(S.of(context).dateFormat);
     return FutureBuilder<Tree.Tree>(
       future: futureTree,
       // this makes the tree of children, when available, go into snapshot.data
@@ -129,7 +128,7 @@ class _PageIntervalsState extends State<PageIntervals> {
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        (snapshot.data!.root.initialDate == null? S.of(context).undefined  : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
+                        (snapshot.data!.root.initialDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
                         style: const TextStyle(fontSize: 20),
                       ),
                     ],
@@ -140,24 +139,24 @@ class _PageIntervalsState extends State<PageIntervals> {
                   padding: EdgeInsets.all(10.0),
                   child: Row(
                     children: [
-                      Text(
+                       Text(
                         S.of(context).finalDate,
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        (snapshot.data!.root.finalDate == null? S.of(context).undefined : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
+                        (snapshot.data!.root.finalDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
                         style: const TextStyle(fontSize: 20),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                    height: 400,
-                    child: SfCalendar(
-                        view: CalendarView.week,
-                        firstDayOfWeek: 1,
-                        dataSource: MeetingDataSource(_buildIntervals(snapshot.data!.root.children))
-                    )
+                  height: 400,
+                  child: SfCalendar(
+                    view: CalendarView.schedule,
+                    firstDayOfWeek: 1,
+                    dataSource: MeetingDataSource(_buildIntervals(snapshot.data!.root.children))
+                  )
                 ),
               ],
             ),
@@ -189,11 +188,8 @@ class _PageIntervalsState extends State<PageIntervals> {
     String strInitialDate = interval.initialDate.toString().split('.')[0];
     // this removes the microseconds part
     String strFinalDate = interval.finalDate.toString().split('.')[0];
-    DateTime strFinalDateTime = DateTime.parse(strFinalDate);
-    DateTime strInitialDateTime = DateTime.parse(strInitialDate);
-
     return ListTile(
-      title: Text(S.of(context).intervalDate(strInitialDateTime, strInitialDateTime,strFinalDateTime,strFinalDateTime)),
+      title: Text(S.of(context).from+ '${strInitialDate}\n'+S.of(context).to+' ${strFinalDate}'),
       trailing: Text('$strDuration'),
     );
   }
