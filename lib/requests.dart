@@ -59,3 +59,25 @@ Future<void> stop(int id) async {
     throw Exception('Failed to get children');
   }
 }
+
+Future<void> addTask(int id, String name) async {
+  var uri = Uri.parse("$baseUrl/addTask?$name&$id");
+  final response = await client.get(uri);
+  if (response.statusCode == 200) {
+    print("statusCode=$response.statusCode");
+  } else {
+    print("statusCode=$response.statusCode");
+    throw Exception('Failed to create new Task');
+  }
+}
+
+Future<void> addProject(int id, String name) async {
+  var uri = Uri.parse("$baseUrl/addProject?$name&$id");
+  final response = await client.get(uri);
+  if (response.statusCode == 200) {
+    print("statusCode=$response.statusCode");
+  } else {
+    print("statusCode=$response.statusCode");
+    throw Exception('Failed to create new Project');
+  }
+}

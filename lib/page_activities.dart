@@ -1,4 +1,6 @@
 import 'package:codelab_timetracker/page_intervals.dart';
+import 'package:codelab_timetracker/page_form_project.dart';
+import 'package:codelab_timetracker/page_form_task.dart';
 import 'package:codelab_timetracker/page_report.dart';
 import 'package:flutter/material.dart';
 import 'package:codelab_timetracker/tree.dart' hide getTree;
@@ -20,6 +22,24 @@ class PageActivities extends StatefulWidget {
 
 }
 
+class MenuItem {
+  final String text;
+  final IconData icon;
+
+  const MenuItem({
+    required this.text,
+    required this.icon
+  });
+}
+
+class MenuItems {
+  static const List<MenuItem> itemsFirst = [
+    itemProject,
+    itemTask,
+  ];
+  static const itemProject = MenuItem(text: 'Crear Proyecto', icon: Icons.weekend_sharp);
+  static const itemTask = MenuItem(text: 'Crear Tarea', icon: Icons.assignment_outlined);
+}
 
 class _PageActivitiesState extends State<PageActivities> {
   late int id;
@@ -62,7 +82,9 @@ class _PageActivitiesState extends State<PageActivities> {
 
   @override
   Widget build(BuildContext context) {
-    DateFormat _dateFormatter = DateFormat(S.of(context).dateFormat);
+    DateFormat _dateFormatter = DateFormat(S
+        .of(context)
+        .dateFormat);
     return FutureBuilder<Tree>(
       future: futureTree,
       // this makes the tree of children, when available, go into snapshot.data
@@ -75,7 +97,7 @@ class _PageActivitiesState extends State<PageActivities> {
               leading: IconButton(
                   icon: Icon(Icons.clear),
                   onPressed: () {
-                    searching=!searching;
+                    searching = !searching;
                   }),
               title: Padding(
                 padding: const EdgeInsets.only(bottom: 10, right: 10),
@@ -97,12 +119,12 @@ class _PageActivitiesState extends State<PageActivities> {
                 ),
               ),
             )
-                :AppBar(
+                : AppBar(
               title: const Text('TimeTracker'),
               actions: <Widget>[
                 IconButton(icon: Icon(Icons.home),
                     onPressed: () {
-                      while(Navigator.of(context).canPop()) {
+                      while (Navigator.of(context).canPop()) {
                         print("pop");
                         Navigator.of(context).pop();
                       }
@@ -129,7 +151,8 @@ class _PageActivitiesState extends State<PageActivities> {
                     padding: EdgeInsets.all(10.0),
                     child: Text(
                       snapshot.data!.root.name,
-                      style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 30, fontWeight: FontWeight.bold),
                     ),
                   ),
                 if (snapshot.data!.root.id != 0)
@@ -139,11 +162,17 @@ class _PageActivitiesState extends State<PageActivities> {
                     child: Row(
                       children: [
                         Text(
-                          S.of(context).initialDate,
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          S
+                              .of(context)
+                              .initialDate,
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight
+                              .bold),
                         ),
                         Text(
-                          (snapshot.data!.root.initialDate == null? S.of(context).undefined : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
+                          (snapshot.data!.root.initialDate == null ? S
+                              .of(context)
+                              .undefined : _dateFormatter.format(
+                              snapshot.data!.root.initialDate!).toString()),
                           style: const TextStyle(fontSize: 20),
                         ),
                       ],
@@ -156,11 +185,17 @@ class _PageActivitiesState extends State<PageActivities> {
                     child: Row(
                       children: [
                         Text(
-                          S.of(context).finalDate,
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          S
+                              .of(context)
+                              .finalDate,
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight
+                              .bold),
                         ),
                         Text(
-                          (snapshot.data!.root.finalDate == null? S.of(context).undefined : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
+                          (snapshot.data!.root.finalDate == null ? S
+                              .of(context)
+                              .undefined : _dateFormatter.format(
+                              snapshot.data!.root.finalDate!).toString()),
                           style: const TextStyle(fontSize: 20),
                         ),
                       ],
@@ -178,6 +213,34 @@ class _PageActivitiesState extends State<PageActivities> {
                     const Divider(),
                   ),
                 ),
+                Container(
+                  padding: EdgeInsets.only(right: 10.0, bottom: 10.0),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      height: 80,
+                      width: 80,
+                      child: PopupMenuButton<MenuItem>(
+                        onSelected: (item) => menuSelection(context, item),
+                        itemBuilder: (context) =>
+                        [
+                          ...MenuItems.itemsFirst.map(buildItem).toList(),
+                        ],
+                        icon: Container(
+                          height: double.infinity,
+                          width: double.infinity,
+                          decoration: ShapeDecoration(
+                              color: Colors.blue,
+                              shape: StadiumBorder(
+                                side: BorderSide(color: Colors.white, width: 2),
+                              )
+                          ),
+                          child: Icon(Icons.add, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           );
@@ -186,7 +249,10 @@ class _PageActivitiesState extends State<PageActivities> {
         }
         // By default, show a progress indicator
         return Container(
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height,
             color: Colors.white,
             child: Center(
               child: CircularProgressIndicator(),
@@ -196,7 +262,10 @@ class _PageActivitiesState extends State<PageActivities> {
   }
 
   Widget _buildRow(Activity activity, int index) {
-    String strDuration = Duration(seconds: activity.duration).toString().split('.').first;
+    String strDuration = Duration(seconds: activity.duration)
+        .toString()
+        .split('.')
+        .first;
     // split by '.' and taking first element of resulting list removes the microseconds part
     if (activity is Project) {
       return Card(
@@ -212,7 +281,7 @@ class _PageActivitiesState extends State<PageActivities> {
       Task task = activity as Task;
       // at the moment is the same, maybe changes in the future
       Widget trailing;
-      selected =activity.active;
+      selected = activity.active;
       trailing = Text('$strDuration');
       return Card(
         elevation: 3,
@@ -257,20 +326,21 @@ class _PageActivitiesState extends State<PageActivities> {
 
 
       );
-
     } else {
-      throw(Exception(S.of(context).unknownActivity));
+      throw(Exception(S
+          .of(context)
+          .unknownActivity));
       // this solves the problem of return Widget is not nullable because an
       // Exception is also a Widget?
     }
   }
 
 
-  void searchValues(){
+  void searchValues() {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) =>  SecondRoute(txtController.text)),
+      MaterialPageRoute(builder: (context) => SecondRoute(txtController.text)),
     );
-    searching=!searching;
+    searching = !searching;
   }
 
   void _navigateSearchedActivities(int childId) {
@@ -309,4 +379,33 @@ class _PageActivitiesState extends State<PageActivities> {
       _refresh();
     });
   }
+
+  PopupMenuItem<MenuItem> buildItem(MenuItem item) =>
+      PopupMenuItem(
+          value: item,
+          child: Row(
+            children: [
+              Icon(item.icon, color: Colors.black, size: 20),
+              const SizedBox(width: 12),
+              Text(item.text),
+            ],
+          )
+      );
+
+  void menuSelection(BuildContext context, MenuItem item) {
+    switch (item) {
+      case MenuItems.itemProject:
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => FormPageProject(id)),
+        );
+        break;
+      case MenuItems.itemTask:
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => FormPageTask(id)),
+        );
+        break;
+    }
+  }
 }
+
+
