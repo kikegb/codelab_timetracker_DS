@@ -1,7 +1,6 @@
 import 'package:codelab_timetracker/page_intervals.dart';
 import 'package:codelab_timetracker/page_form_project.dart';
 import 'package:codelab_timetracker/page_form_task.dart';
-import 'package:codelab_timetracker/page_report.dart';
 import 'package:flutter/material.dart';
 import 'package:codelab_timetracker/tree.dart' hide getTree;
 // the old getTree()
@@ -38,12 +37,12 @@ class MenuItems {
     itemTask,
   ];
   static const itemProject = MenuItem(
-      text: 'Crear Proyecto',
-      icon: Icons.weekend_sharp,
+    text: 'Crear Proyecto',
+    icon: Icons.weekend_sharp,
   );
   static const itemTask = MenuItem(
-      text: 'Crear Tarea',
-      icon: Icons.assignment_outlined,
+    text: 'Crear Tarea',
+    icon: Icons.assignment_outlined,
   );
 }
 
@@ -219,35 +218,35 @@ class _PageActivitiesState extends State<PageActivities> {
                     const Divider(),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.only(right: 10.0, bottom: 10.0),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: Container(
-                      height: 80,
-                      width: 80,
-                      child: PopupMenuButton<MenuItem>(
-                        onSelected: (item) => menuSelection(context, item),
-                        itemBuilder: (context) =>
-                        [
-                          ...MenuItems.itemsFirst.map(buildItem).toList(),
-                        ],
-                        icon: Container(
-                          height: double.infinity,
-                          width: double.infinity,
-                          decoration: ShapeDecoration(
-                              color: Colors.blue,
-                              shape: StadiumBorder(
-                                side: BorderSide(color: Colors.white, width: 2),
-                              )
-                          ),
-                          child: Icon(Icons.add, color: Colors.white),
-                        ),
+              ],
+            ),
+            floatingActionButton: Container(
+              padding: EdgeInsets.only(right: 10.0, bottom: 10.0),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(
+                  height: 80,
+                  width: 80,
+                  child: PopupMenuButton<MenuItem>(
+                    onSelected: (item) => menuSelection(context, item),
+                    itemBuilder: (context) =>
+                    [
+                      ...MenuItems.itemsFirst.map(buildItem).toList(),
+                    ],
+                    icon: Container(
+                      height: double.infinity,
+                      width: double.infinity,
+                      decoration: ShapeDecoration(
+                          color: Colors.blue,
+                          shape: StadiumBorder(
+                            side: BorderSide(color: Colors.white, width: 2),
+                          )
                       ),
+                      child: Icon(Icons.add, color: Colors.white),
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
           );
         } else if (snapshot.hasError) {
@@ -298,6 +297,7 @@ class _PageActivitiesState extends State<PageActivities> {
             spacing: 0,
             children: <Widget>[
               IconButton(
+                iconSize: 30.0,
                 icon: selected
                     ? Icon(Icons.stop)
                     : Icon(Icons.play_arrow)
@@ -319,15 +319,6 @@ class _PageActivitiesState extends State<PageActivities> {
             ],
           ),
           onTap: () => _navigateDownIntervals(activity.id),
-          onLongPress: () {
-            if ((activity as Task).active) {
-              stop(activity.id);
-              _refresh(); // to show immediately that task has started
-            } else {
-              start(activity.id);
-              _refresh(); // to show immediately that task has stopped
-            }
-          },
         ),
 
 
@@ -413,5 +404,3 @@ class _PageActivitiesState extends State<PageActivities> {
     }
   }
 }
-
-

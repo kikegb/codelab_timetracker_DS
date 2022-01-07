@@ -34,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "finalDate": MessageLookupByLibrary.simpleMessage("Final date: "),
         "from": MessageLookupByLibrary.simpleMessage("from"),
         "initialDate": MessageLookupByLibrary.simpleMessage("Initial date: "),
+        "required": MessageLookupByLibrary.simpleMessage("Required field"),
         "resultsFor": MessageLookupByLibrary.simpleMessage("Results for: "),
         "to": MessageLookupByLibrary.simpleMessage("to"),
         "undefined": MessageLookupByLibrary.simpleMessage("undefined"),

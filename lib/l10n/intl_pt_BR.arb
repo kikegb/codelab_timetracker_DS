@@ -1,13 +1,13 @@
 {
   "@@locale":"pt_BR",
-  "initialDate": "Fecha do inicialisaçao: ",
-  "finalDate": "Fecha do finalisasao: ",
+  "initialDate": "Data de início: ",
+  "finalDate": "Data final: ",
   "from" :"dose",
   "to" : "fins",
-  "unknownActivity" : "No es uma tasca ni um proyecto kkkk",
+  "unknownActivity" : "No es uma tasca ni um proyecto",
   "undefined": "sem definisao",
   "dateFormat": "dd-MM-yyyy HH:mm:ss",
-  "resultsFor": "Resultadinho per: ",
+  "resultsFor": "Resultado para: ",
   "intervalDate": "desde {date} {hour} \n a {finalDate} {finalhour}",
   "create_project": "Criar Projeto",
   "create": "Criar",
@@ -15,6 +15,7 @@
   "Name": "Nome",
   "Itask": "Insira o nome da tarefa",
   "create_task": "Crie a Tarefa",
+  "required": "Campo obrigatório",
   "@intervalDate": {
     "placeholders": {
       "date": {

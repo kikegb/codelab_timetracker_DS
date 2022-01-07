@@ -191,6 +191,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Campo requerido`
+  String get required {
+    return Intl.message(
+      'Campo requerido',
+      name: 'required',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

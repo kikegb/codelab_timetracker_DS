@@ -15,6 +15,7 @@
   "Name": "Nombre",
   "Itask": "Introduce el nombre de la tarea",
   "create_task": "Crear Tarea",
+  "required": "Campo requerido",
   "@intervalDate": {
     "placeholders": {
       "date": {

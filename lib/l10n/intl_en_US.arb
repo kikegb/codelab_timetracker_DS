@@ -15,6 +15,7 @@
   "Name": "Name",
   "Itask": "Enter task name",
   "create_task": "Create Task",
+  "required": "Required field",
   "@intervalDate": {
     "placeholders": {
       "date": {

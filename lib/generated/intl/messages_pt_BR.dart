@@ -32,16 +32,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_task": MessageLookupByLibrary.simpleMessage("Crie a Tarefa"),
         "dateFormat":
             MessageLookupByLibrary.simpleMessage("dd-MM-yyyy HH:mm:ss"),
-        "finalDate":
-            MessageLookupByLibrary.simpleMessage("Fecha do finalisasao: "),
+        "finalDate": MessageLookupByLibrary.simpleMessage("Data final: "),
         "from": MessageLookupByLibrary.simpleMessage("dose"),
-        "initialDate":
-            MessageLookupByLibrary.simpleMessage("Fecha do inicialisaçao: "),
-        "resultsFor":
-            MessageLookupByLibrary.simpleMessage("Resultadinho per: "),
+        "initialDate": MessageLookupByLibrary.simpleMessage("Data de início: "),
+        "required": MessageLookupByLibrary.simpleMessage("Campo obrigatório"),
+        "resultsFor": MessageLookupByLibrary.simpleMessage("Resultado para: "),
         "to": MessageLookupByLibrary.simpleMessage("fins"),
         "undefined": MessageLookupByLibrary.simpleMessage("sem definisao"),
         "unknownActivity": MessageLookupByLibrary.simpleMessage(
-            "No es uma tasca ni um proyecto kkkk")
+            "No es uma tasca ni um proyecto")
       };
 }
