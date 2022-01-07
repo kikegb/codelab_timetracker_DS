@@ -132,31 +132,61 @@ class S {
 
   // skipped getter for the 'intervalDate' key
 
-  /// `Tipo de vista: `
-  String get selectViewTitle {
+  /// `Crear Proyecto`
+  String get create_project {
     return Intl.message(
-      'Tipo de vista: ',
-      name: 'selectViewTitle',
+      'Crear Proyecto',
+      name: 'create_project',
       desc: '',
       args: [],
     );
   }
 
-  /// `Lista`
-  String get listView {
+  /// `Crear`
+  String get create {
     return Intl.message(
-      'Lista',
-      name: 'listView',
+      'Crear',
+      name: 'create',
       desc: '',
       args: [],
     );
   }
 
-  /// `Calendario`
-  String get calendarView {
+  /// `Introducir nombre del proyecto`
+  String get Iproject {
     return Intl.message(
-      'Calendario',
-      name: 'calendarView',
+      'Introducir nombre del proyecto',
+      name: 'Iproject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nombre`
+  String get Name {
+    return Intl.message(
+      'Nombre',
+      name: 'Name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Introduce el nombre de la tarea`
+  String get Itask {
+    return Intl.message(
+      'Introduce el nombre de la tarea',
+      name: 'Itask',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Crear Tarea`
+  String get create_task {
+    return Intl.message(
+      'Crear Tarea',
+      name: 'create_task',
       desc: '',
       args: [],
     );

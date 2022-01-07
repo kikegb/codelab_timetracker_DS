@@ -22,7 +22,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "calendarView": MessageLookupByLibrary.simpleMessage("Calendário"),
+        "Iproject":
+            MessageLookupByLibrary.simpleMessage("Insira o nome do projeto"),
+        "Itask":
+            MessageLookupByLibrary.simpleMessage("Insira o nome da tarefa"),
+        "Name": MessageLookupByLibrary.simpleMessage("Nome"),
+        "create": MessageLookupByLibrary.simpleMessage("Criar"),
+        "create_project": MessageLookupByLibrary.simpleMessage("Criar Projeto"),
+        "create_task": MessageLookupByLibrary.simpleMessage("Crie a Tarefa"),
         "dateFormat":
             MessageLookupByLibrary.simpleMessage("dd-MM-yyyy HH:mm:ss"),
         "finalDate":
@@ -30,11 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "from": MessageLookupByLibrary.simpleMessage("dose"),
         "initialDate":
             MessageLookupByLibrary.simpleMessage("Fecha do inicialisaçao: "),
-        "listView": MessageLookupByLibrary.simpleMessage("Lista"),
         "resultsFor":
             MessageLookupByLibrary.simpleMessage("Resultadinho per: "),
-        "selectViewTitle":
-            MessageLookupByLibrary.simpleMessage("Tipo de visualização: "),
         "to": MessageLookupByLibrary.simpleMessage("fins"),
         "undefined": MessageLookupByLibrary.simpleMessage("sem definisao"),
         "unknownActivity": MessageLookupByLibrary.simpleMessage(

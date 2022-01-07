@@ -25,6 +25,8 @@ class _PageIntervalsState extends State<PageIntervals> {
   bool searching = false;
   TextEditingController txtController = TextEditingController();
   static const int periodeRefresh = 6;
+  bool isSwitched = false;
+  bool viewCalendar = false;
 
   @override
   void initState() {
@@ -110,13 +112,40 @@ class _PageIntervalsState extends State<PageIntervals> {
             ),
             body: Column(
               children: [
-                Container(
-                  alignment: Alignment.topLeft,
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    snapshot.data!.root.name,
-                    style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
+                Row(
+                  children: [
+                    Container(
+                      alignment: Alignment.topLeft,
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        snapshot.data!.root.name,
+                        style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(100, 0, 0, 0),
+                      
+                      child: IconButton(
+                        iconSize: 50.0,
+                        icon: (snapshot.data!.root as Tree.Task).active
+                            ? Icon(Icons.stop)
+                            : Icon(Icons.play_arrow)
+                        ,
+                        color: (snapshot.data!.root as Tree.Task).active
+                            ? Colors.red
+                            : Colors.green,
+                        onPressed: () {
+                          if ((snapshot.data!.root as Tree.Task).active) {
+                            stop(snapshot.data!.root.id);
+                            _refresh(); // to show immediately that task has started
+                          } else {
+                            start(snapshot.data!.root.id);
+                            _refresh(); // to show immediately that task has stopped
+                          }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
                 Container(
                   alignment: Alignment.topLeft,
@@ -151,24 +180,6 @@ class _PageIntervalsState extends State<PageIntervals> {
                   ),
                 ),
                 Container(
-                  child: Row(
-                    children: [
-                      Text(
-                        S.of(context).selectViewTitle,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        S.of(context).listView,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        S.of(context).calendarView,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
                   height: 400,
                   child: SfCalendar(
                     view: CalendarView.schedule,
@@ -198,19 +209,6 @@ class _PageIntervalsState extends State<PageIntervals> {
     );
     searching=!searching;
   }
-  Widget _buildRow(Tree.Interval interval, int index) {
-    String strDuration = Duration(seconds: interval.duration)
-        .toString()
-        .split('.')
-        .first;
-    String strInitialDate = interval.initialDate.toString().split('.')[0];
-    // this removes the microseconds part
-    String strFinalDate = interval.finalDate.toString().split('.')[0];
-    return ListTile(
-      title: Text(S.of(context).from+ '${strInitialDate}\n'+S.of(context).to+' ${strFinalDate}'),
-      trailing: Text('$strDuration'),
-    );
-  }
 
   List<Appointment> _buildIntervals(List<dynamic> children){
     List<Appointment> intervals = <Appointment>[];
@@ -220,6 +218,11 @@ class _PageIntervalsState extends State<PageIntervals> {
       intervals.add(Appointment(startTime: init, endTime: end));
     }
     return intervals;
+  }
+
+  void _refresh() async {
+    futureTree = getTree(id); // to be used in build()
+    setState(() {});
   }
 }
 

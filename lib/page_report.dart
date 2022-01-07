@@ -230,7 +230,7 @@ class _PageReportState extends State<PageReport> {
     );
     From = newStart!;
     DateTime end = To;
-    if (end.difference(newStart!) >= const Duration(days: 0)) {
+    if (end.difference(newStart) >= const Duration(days: 0)) {
     TimeRange = DateTimeRange(start: newStart, end: end);
 // x is where you store the (From,To) DateTime pairs
 // associated to the ’Other’ option

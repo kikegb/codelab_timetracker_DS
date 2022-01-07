@@ -22,17 +22,22 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "calendarView": MessageLookupByLibrary.simpleMessage("Calendario"),
+        "Iproject": MessageLookupByLibrary.simpleMessage(
+            "Introducir nombre del proyecto"),
+        "Itask": MessageLookupByLibrary.simpleMessage(
+            "Introduce el nombre de la tarea"),
+        "Name": MessageLookupByLibrary.simpleMessage("Nombre"),
+        "create": MessageLookupByLibrary.simpleMessage("Crear"),
+        "create_project":
+            MessageLookupByLibrary.simpleMessage("Crear Proyecto"),
+        "create_task": MessageLookupByLibrary.simpleMessage("Crear Tarea"),
         "dateFormat":
             MessageLookupByLibrary.simpleMessage("dd-MM-yyyy HH:mm:ss"),
         "finalDate":
             MessageLookupByLibrary.simpleMessage("Fecha de finalización: "),
         "from": MessageLookupByLibrary.simpleMessage("desde"),
         "initialDate": MessageLookupByLibrary.simpleMessage("Fecha inicial: "),
-        "listView": MessageLookupByLibrary.simpleMessage("Lista"),
         "resultsFor": MessageLookupByLibrary.simpleMessage("Resultados para: "),
-        "selectViewTitle":
-            MessageLookupByLibrary.simpleMessage("Tipo de vista: "),
         "to": MessageLookupByLibrary.simpleMessage("a"),
         "undefined": MessageLookupByLibrary.simpleMessage("indefinido"),
         "unknownActivity": MessageLookupByLibrary.simpleMessage(

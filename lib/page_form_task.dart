@@ -3,6 +3,8 @@ import 'package:codelab_timetracker/tree.dart' hide getTree;
 import 'package:flutter/material.dart';
 import 'package:codelab_timetracker/page_activities.dart';
 
+import 'generated/l10n.dart';
+
 
 
 class FormPageTask extends StatefulWidget {
