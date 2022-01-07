@@ -184,7 +184,7 @@ class _PageIntervalsState extends State<PageIntervals> {
                   child: SfCalendar(
                     view: CalendarView.schedule,
                     firstDayOfWeek: 1,
-                    dataSource: MeetingDataSource(_buildIntervals(snapshot.data!.root.children))
+                    dataSource: MeetingDataSource(_buildIntervals(snapshot.data!.root.children, (snapshot.data!.root as Tree.Task).active))
                   )
                 ),
               ],
@@ -210,12 +210,18 @@ class _PageIntervalsState extends State<PageIntervals> {
     searching=!searching;
   }
 
-  List<Appointment> _buildIntervals(List<dynamic> children){
+  List<Appointment> _buildIntervals(List<dynamic> children, bool active){
     List<Appointment> intervals = <Appointment>[];
     for(int i = 0; i < children.length; i++){
       DateTime init = children[i].initialDate!;
       DateTime end = children[i].finalDate!;
-      intervals.add(Appointment(startTime: init, endTime: end));
+      if(i==children.length-1) {
+        intervals.add(Appointment(startTime: init,
+            endTime: end,
+            color: active ? Colors.red : Colors.blue));
+      }
+      else
+        intervals.add(Appointment(startTime: init, endTime: end, color:Colors.blue));
     }
     return intervals;
   }
@@ -225,7 +231,6 @@ class _PageIntervalsState extends State<PageIntervals> {
     setState(() {});
   }
 }
-
 
 
 class MeetingDataSource extends CalendarDataSource{

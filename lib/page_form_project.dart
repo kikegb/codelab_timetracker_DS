@@ -31,7 +31,7 @@ class _FormPageProjectState extends State<FormPageProject> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.of(context).create_project),
+        title: Text('Crear Proyecto'),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.home),
               onPressed: () {
@@ -66,7 +66,7 @@ class _FormPageProjectState extends State<FormPageProject> {
                   }
                 },
                 color: Colors.blue,
-                child: Text((S.of(context).create), style:TextStyle(color: Colors.white)),
+                child: Text('Crear', style:TextStyle(color: Colors.white)),
               ),
             ],
           ),
@@ -81,12 +81,10 @@ class _FormPageProjectState extends State<FormPageProject> {
         controller: name,
         validator: (value) => value!.isEmpty ? "campo requerido" : null,
         decoration: InputDecoration(
-        labelText: (S.of(context).Iproject),
-        hintText: (S.of(context).Name),
+          labelText: 'Introducir nombre del proyecto',
+          hintText: 'Nombre',
         ),
       ),
     );
   }
 }
-
-
