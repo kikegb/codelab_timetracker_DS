@@ -1,7 +1,7 @@
 {
   "@@locale":"pt_BR",
   "initialDate": "Fecha do inicialisaçao: ",
-  "finalDate": "Fecha do finalisasao",
+  "finalDate": "Fecha do finalisasao: ",
   "from" :"dose",
   "to" : "fins",
   "unknownActivity" : "No es uma tasca ni um proyecto kkkk",

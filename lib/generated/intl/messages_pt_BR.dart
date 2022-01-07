@@ -33,7 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dateFormat":
             MessageLookupByLibrary.simpleMessage("dd-MM-yyyy HH:mm:ss"),
         "finalDate":
-            MessageLookupByLibrary.simpleMessage("Fecha do finalisasao"),
+            MessageLookupByLibrary.simpleMessage("Fecha do finalisasao: "),
         "from": MessageLookupByLibrary.simpleMessage("dose"),
         "initialDate":
             MessageLookupByLibrary.simpleMessage("Fecha do inicialisaçao: "),

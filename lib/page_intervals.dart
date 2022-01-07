@@ -9,7 +9,6 @@ import 'package:codelab_timetracker/requests.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:codelab_timetracker/generated/l10n.dart';
-final DateFormat _dateFormatter = DateFormat("yyyy-MM-dd HH:mm:ss");
 
 class PageIntervals extends StatefulWidget {
   final int id;
@@ -53,6 +52,7 @@ class _PageIntervalsState extends State<PageIntervals> {
 
   @override
   Widget build(BuildContext context) {
+    DateFormat _dateFormatter = DateFormat(S.of(context).dateFormat);
     return FutureBuilder<Tree.Tree>(
       future: futureTree,
       // this makes the tree of children, when available, go into snapshot.data
@@ -157,7 +157,7 @@ class _PageIntervalsState extends State<PageIntervals> {
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        (snapshot.data!.root.initialDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
+                        (snapshot.data!.root.initialDate == null? S.of(context).undefined : _dateFormatter.format(snapshot.data!.root.initialDate!).toString()),
                         style: const TextStyle(fontSize: 20),
                       ),
                     ],
@@ -173,7 +173,7 @@ class _PageIntervalsState extends State<PageIntervals> {
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        (snapshot.data!.root.finalDate == null? 'undefined' : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
+                        (snapshot.data!.root.finalDate == null? S.of(context).undefined : _dateFormatter.format(snapshot.data!.root.finalDate!).toString()),
                         style: const TextStyle(fontSize: 20),
                       ),
                     ],
